@@ -52,18 +52,21 @@ const ComponentCard: React.FC<ComponentCardProps> = ({
     if (!user || user.id !== component.user_id) return;
     if (!window.confirm('Are you sure you want to delete this component?')) return;
     try {
+      console.log('Deleting component:', component.id);
       const { error } = await supabase
         .from('components')
         .delete()
         .eq('id', component.id)
         .eq('user_id', user.id);
       if (error) throw error;
+      console.log('Component deleted successfully, calling onDelete callback');
       toast.success('Component deleted');
       // Call the callback immediately after successful deletion
       if (onDelete) {
         onDelete();
       }
     } catch (error) {
+      console.error('Delete error:', error);
       toast.error('Failed to delete component');
     }
   };

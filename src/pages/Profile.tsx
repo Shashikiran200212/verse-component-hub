@@ -39,6 +39,7 @@ const Profile = () => {
 
     try {
       setLoading(true);
+      console.log('Fetching user data...');
 
       // Fetch user profile
       const { data: profile } = await supabase
@@ -60,7 +61,7 @@ const Profile = () => {
         console.error('User components error:', componentsError);
       }
 
-      console.log('User components:', components);
+      console.log('Fetched user components:', components?.length || 0, 'components');
       
       // Add profile data to components
       const userComponentsData: Component[] = (components || []).map((component) => ({
@@ -119,6 +120,8 @@ const Profile = () => {
       } else {
         setSavedComponents([]);
       }
+      
+      console.log('Data fetching completed');
     } catch (error) {
       console.error('Error fetching user data:', error);
       toast.error('Failed to load profile data');
