@@ -295,6 +295,7 @@ const Home = () => {
                 component={component}
                 onLike={fetchComponents}
                 onSave={fetchComponents}
+                onDelete={fetchComponents}
               />
             ))}
           </div>
