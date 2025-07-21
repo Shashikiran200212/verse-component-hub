@@ -59,7 +59,10 @@ const ComponentCard: React.FC<ComponentCardProps> = ({
         .eq('user_id', user.id);
       if (error) throw error;
       toast.success('Component deleted');
-      onDelete?.();
+      // Call the callback immediately after successful deletion
+      if (onDelete) {
+        onDelete();
+      }
     } catch (error) {
       toast.error('Failed to delete component');
     }
